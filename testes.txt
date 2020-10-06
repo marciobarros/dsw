@@ -1,0 +1,40 @@
+==================================================
+
+GET localhost:8080/api/item/lista/0
+
+Authorization Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWxhbm9Ac29tZXdoZXJlMS5jb20iLCJyb2xlIjoiUk9MRV9CQVNJQyIsImNyZWF0ZWQiOjE1OTk3ODI1NzM4NTcsImV4cCI6MTU5OTg2ODk3M30.zsD_0c08dF2H_ZzLGKyoFQ53Il9yrZ1JyWSqqevhQGDMJf0D53izFbzwWpIop6NMm3ISkJXcPoXgpeyAeVbZyg
+
+==================================================
+
+PUT localhost:8080/api/item/novo
+
+Authorization Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWxhbm9Ac29tZXdoZXJlMS5jb20iLCJyb2xlIjoiUk9MRV9CQVNJQyIsImNyZWF0ZWQiOjE1OTk3ODI1NzM4NTcsImV4cCI6MTU5OTg2ODk3M30.zsD_0c08dF2H_ZzLGKyoFQ53Il9yrZ1JyWSqqevhQGDMJf0D53izFbzwWpIop6NMm3ISkJXcPoXgpeyAeVbZyg
+
+Body:
+{
+    "nome": "Item Fulano #0",
+    "descricao": "Descricao Item Fulano #0",
+    "tipo": "bagaca"
+}
+
+
+==================================================
+
+POST localhost:8080/api/item/atualiza
+
+Authorization Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWxhbm9Ac29tZXdoZXJlMS5jb20iLCJyb2xlIjoiUk9MRV9CQVNJQyIsImNyZWF0ZWQiOjE1OTk3ODI1NzM4NTcsImV4cCI6MTU5OTg2ODk3M30.zsD_0c08dF2H_ZzLGKyoFQ53Il9yrZ1JyWSqqevhQGDMJf0D53izFbzwWpIop6NMm3ISkJXcPoXgpeyAeVbZyg
+
+Body:
+{
+    "id": 1,
+    "nome": "Item Fulano #0-0-0",
+    "descricao": "Descricao Item Fulano #0-0-0",
+    "tipo": "UNICO"
+}
+
+==================================================
+
+DELETE localhost:8080/api/item/remove/1
+
+Authorization Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmdWxhbm9Ac29tZXdoZXJlMS5jb20iLCJyb2xlIjoiUk9MRV9CQVNJQyIsImNyZWF0ZWQiOjE1OTk3ODI1NzM4NTcsImV4cCI6MTU5OTg2ODk3M30.zsD_0c08dF2H_ZzLGKyoFQ53Il9yrZ1JyWSqqevhQGDMJf0D53izFbzwWpIop6NMm3ISkJXcPoXgpeyAeVbZyg
+
