@@ -13,3 +13,11 @@ select Now()
 
 Retornar Forbidden (403) porque o CSRF está ligado por default. Precisa desligar na configuração do Spring Security.
 
+
+
+
+# Próximos passos
+
+* trim nos campos dos itens compartilhados antes de aplicar as regras de negócio
+
+* Remoção de item compartilhado, com confirmação

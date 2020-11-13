@@ -178,24 +178,24 @@ public class UsuarioController
 		String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		if (username == null)
-			return ControllerResponse.fail("Não há um usuário logado no sistema.");
+			return ControllerResponse.fail("senhaAntiga", "Não há um usuário logado no sistema.");
 
         Usuario usuario = usuarioRepositorio.findByEmail(username);
 
 		if (usuario == null)
-			return ControllerResponse.fail("Não foi possível recuperar os dados do usuário a partir das credenciais.");
+			return ControllerResponse.fail("senhaAntiga", "Não foi possível recuperar os dados do usuário a partir das credenciais.");
         
 		if (!ValidationUtils.validPassword(form.getSenhaAntiga()))
-			return ControllerResponse.fail("A senha atual do usuário não é válida.");
+			return ControllerResponse.fail("senhaAntiga", "A senha atual do usuário não é válida.");
 		
         if (!passwordEncoder.matches(form.getSenhaAntiga(), usuario.getSenha()))
-			return ControllerResponse.fail("A senha atual não está igual à senha registrada no sistema.");
+			return ControllerResponse.fail("senhaAntiga", "A senha atual não está igual à senha registrada no sistema.");
 		
 		if (!ValidationUtils.validPassword(form.getSenhaNova()))
-			return ControllerResponse.fail("A nova senha do usuário não é válida.");
+			return ControllerResponse.fail("senhaNova", "A nova senha do usuário não é válida.");
 		
 		if (!form.getSenhaNova().equals(form.getSenhaNovaRepetida()))
-			return ControllerResponse.fail("A confirmação de senha está diferente da senha.");
+			return ControllerResponse.fail("senhaNovaRepetida", "A confirmação de senha está diferente da senha.");
  
 		String encryptedPassword = passwordEncoder.encode(form.getSenhaNova());
 		usuario.setSenha(encryptedPassword);

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.unirio.dsw.compartilhador.api.model.ItemCompartilhado;
@@ -52,8 +53,8 @@ public class ItemCompartilhadoController
 	/**
 	 * Ação que lista os itens compartilhados de um usuário
 	 */
-	@GetMapping(value = "/lista/{page}")
-	public ResponseEntity<ResponseData> list(@PathVariable("page") int page)
+	@GetMapping(value = "/lista")
+	public ResponseEntity<ResponseData> list(@RequestParam int page, @RequestParam int per_page)
 	{
 		log.info("Listando items dono");
 		String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -66,12 +67,10 @@ public class ItemCompartilhadoController
 		if (usuario == null)
 			return ControllerResponse.fail("Não foi possível recuperar os dados do usuário a partir das credenciais.");
 		
-		Pageable pageable = PageRequest.of(page, 25);
+		Pageable pageable = PageRequest.of(page-1, per_page);
 		Page<ItemCompartilhado> itens = itemRepositorio.findByUsuarioId(usuario.getId(), pageable);
 
-		PageDTO<ItemCompartilhadoDTO> result = new PageDTO<ItemCompartilhadoDTO>();
-		result.setTotalElements(itens.getTotalElements());
-		result.setTotalPages(itens.getTotalPages());
+		PageDTO<ItemCompartilhadoDTO> result = new PageDTO<ItemCompartilhadoDTO>(itens.getTotalElements(), page, per_page);
 		
 		itens.forEach(item -> {
 			ItemCompartilhadoDTO dto = new ItemCompartilhadoDTO();
@@ -95,32 +94,32 @@ public class ItemCompartilhadoController
 		String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		if (username == null)
-			return ControllerResponse.fail("Não há um usuário logado no sistema.");
+			return ControllerResponse.fail("nome", "Não há um usuário logado no sistema.");
 
         Usuario usuario = usuarioRepositorio.findByEmail(username);
 
 		if (usuario == null)
-			return ControllerResponse.fail("Não foi possível recuperar os dados do usuário a partir das credenciais.");
+			return ControllerResponse.fail("nome", "Não foi possível recuperar os dados do usuário a partir das credenciais.");
 
 		if (form.getNome().length() == 0)
-			return ControllerResponse.fail("O nome do item compartilhado não pode ser vazio.");
+			return ControllerResponse.fail("nome", "O nome do item compartilhado não pode ser vazio.");
 
 		if (form.getNome().length() > 80)
-			return ControllerResponse.fail("O nome do item compartilhado não pode ter mais do que 80 caracteres.");
+			return ControllerResponse.fail("nome", "O nome do item compartilhado não pode ter mais do que 80 caracteres.");
 		
 		ItemCompartilhado itemAnterior = itemRepositorio.findByNomeAndUsuarioId(form.getNome(), usuario.getId());
 		
 		if (itemAnterior != null)
-			return ControllerResponse.fail("Já existe um item compartilhado registrado com este nome no sistema.");
+			return ControllerResponse.fail("nome", "Já existe um item compartilhado registrado com este nome no sistema.");
 
 		if (form.getDescricao().length() == 0)
-			return ControllerResponse.fail("A descrição do item compartilhado não pode ser vazia.");
+			return ControllerResponse.fail("descricao", "A descrição do item compartilhado não pode ser vazia.");
 
 		if (form.getDescricao().length() > 255)
-			return ControllerResponse.fail("A descrição do item compartilhado não pode ter mais do que 255 caracteres.");
+			return ControllerResponse.fail("descricao", "A descrição do item compartilhado não pode ter mais do que 255 caracteres.");
 
 		if (form.getTipo().compareToIgnoreCase("unico") != 0 && form.getTipo().compareToIgnoreCase("multiplo") != 0)
-			return ControllerResponse.fail("O tipo do item compartilhado deve ser 'único' ou 'múltiplo'.");
+			return ControllerResponse.fail("tipo", "O tipo do item compartilhado deve ser 'único' ou 'múltiplo'.");
 		
 		TipoItemCompartilhado tipo = (form.getTipo().compareToIgnoreCase("unico") == 0) ? TipoItemCompartilhado.UNICO : TipoItemCompartilhado.MULTIPLO;
  
@@ -134,6 +133,7 @@ public class ItemCompartilhadoController
 		return ControllerResponse.success();
 	}
 	
+	
 	/**
 	 * Ação que atualiza os dados de um item compartilhado
 	 */
@@ -144,43 +144,43 @@ public class ItemCompartilhadoController
 		String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		if (username == null)
-			return ControllerResponse.fail("Não há um usuário logado no sistema.");
+			return ControllerResponse.fail("nome", "Não há um usuário logado no sistema.");
 
         Usuario usuario = usuarioRepositorio.findByEmail(username);
 
 		if (usuario == null)
-			return ControllerResponse.fail("Não foi possível recuperar os dados do usuário a partir das credenciais.");
+			return ControllerResponse.fail("nome", "Não foi possível recuperar os dados do usuário a partir das credenciais.");
 
 		Optional<ItemCompartilhado> item = itemRepositorio.findById(form.getId());
 		
 		if (!item.isPresent())
-			return ControllerResponse.fail("O item compartilhado não foi encontrado.");
+			return ControllerResponse.fail("nome", "O item compartilhado não foi encontrado.");
 		
 		if (item.get().getUsuario().getId() != usuario.getId())
-			return ControllerResponse.fail("O item compartilhado não pertence ao usuário logado.");
+			return ControllerResponse.fail("nome", "O item compartilhado não pertence ao usuário logado.");
 
 		if (item.get().isRemovido())
-			return ControllerResponse.fail("O item compartilhado já foi removido.");
+			return ControllerResponse.fail("nome", "O item compartilhado já foi removido.");
 
 		if (form.getNome().length() == 0)
-			return ControllerResponse.fail("O nome do item compartilhado não pode ser vazio.");
+			return ControllerResponse.fail("nome", "O nome do item compartilhado não pode ser vazio.");
 
 		if (form.getNome().length() > 80)
-			return ControllerResponse.fail("O nome do item compartilhado não pode ter mais do que 80 caracteres.");
+			return ControllerResponse.fail("nome", "O nome do item compartilhado não pode ter mais do que 80 caracteres.");
 		
 		ItemCompartilhado itemAnterior = itemRepositorio.findByNomeAndUsuarioId(form.getNome(), usuario.getId());
 		
 		if (itemAnterior != null && itemAnterior.getId() != form.getId())
-			return ControllerResponse.fail("Já existe um item compartilhado registrado com este nome no sistema.");
+			return ControllerResponse.fail("nome", "Já existe um item compartilhado registrado com este nome no sistema.");
 
 		if (form.getDescricao().length() == 0)
-			return ControllerResponse.fail("A descrição do item compartilhado não pode ser vazia.");
+			return ControllerResponse.fail("descricao", "A descrição do item compartilhado não pode ser vazia.");
 
 		if (form.getDescricao().length() > 255)
-			return ControllerResponse.fail("A descrição do item compartilhado não pode ter mais do que 255 caracteres.");
+			return ControllerResponse.fail("descricao", "A descrição do item compartilhado não pode ter mais do que 255 caracteres.");
 
 		if (form.getTipo().compareToIgnoreCase("unico") != 0 && form.getTipo().compareToIgnoreCase("multiplo") != 0)
-			return ControllerResponse.fail("O tipo do item compartilhado deve ser 'único' ou 'múltiplo'.");
+			return ControllerResponse.fail("tipo", "O tipo do item compartilhado deve ser 'único' ou 'múltiplo'.");
 		
 		TipoItemCompartilhado tipo = (form.getTipo().compareToIgnoreCase("unico") == 0) ? TipoItemCompartilhado.UNICO : TipoItemCompartilhado.MULTIPLO;
  

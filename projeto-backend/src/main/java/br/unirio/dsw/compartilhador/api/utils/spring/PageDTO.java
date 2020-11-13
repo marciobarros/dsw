@@ -13,26 +13,45 @@ import lombok.Setter;
  */
 public class PageDTO<T>
 {
-	private List<T> itens;
+	private List<T> data;
 	
-	private @Getter @Setter long totalElements;
+	private @Getter @Setter long total;
+
+	private @Getter @Setter int current_page;
 	
-	private @Getter @Setter int totalPages;
+	private @Getter @Setter int per_page;	
 	
-	public PageDTO()
+	public PageDTO(long total, int currentPage, int pageSize)
 	{
-		this.itens = new ArrayList<T>();
-		this.totalElements = 0;
-		this.totalPages = 0;
+		this.data = new ArrayList<T>();
+		this.total = total;
+		this.current_page = currentPage;
+		this.per_page = pageSize;
+	}
+	
+	public int getLast_page()
+	{
+		int last = (int)(total / per_page) + ((total % per_page == 0) ? 0 : 1);
+		return Math.max(last,  1);
+	}
+	
+	public int getFrom()
+	{
+		return (current_page - 1) * per_page + 1;
+	}
+	
+	public int getTo()
+	{
+		return current_page * per_page;
 	}
 	
 	public void add(T item)
 	{
-		itens.add(item);
+		data.add(item);
 	}
 	
-	public Iterable<T> getItens()
+	public Iterable<T> getData()
 	{
-		return itens;
+		return data;
 	}
 }

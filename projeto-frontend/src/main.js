@@ -1,23 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import App from './App.vue'
 import Homepage from './components/Homepage.vue'
-import Login from './components/login/Login.vue'
+import Login from './components/login/login/Login.vue'
 
-/* New account creation */
-import CreateAccount from './components/login/create-account/CreateAccount.vue'
-import AccountCreated from './components/login/create-account/AccountCreated.vue'
+/* Criacao de conta */
+import CriacaoConta from './components/login/criacao-conta/CriacaoConta.vue'
+import CriacaoContaSucesso from './components/login/criacao-conta/CriacaoContaSucesso.vue'
 
-/* Password forgot & reset */
-import ForgotPassword from './components/login/forgot-password/ForgotPassword.vue'
-import TokenSent from './components/login/forgot-password/TokenSent.vue'
-import ResetPassword from './components/login/forgot-password/ResetPassword.vue'
-import ResetedPassword from './components/login/forgot-password/ResetedPassword.vue'
+/* Esquecimento de senha */
+import EsquecimentoSenha from './components/login/esquecimento-senha/EsquecimentoSenha.vue'
+import EsquecimentoSenhaSucesso from './components/login/esquecimento-senha/EsquecimentoSenhaSucesso.vue'
+import RecuperacaoSenha from './components/login/esquecimento-senha/RecuperacaoSenha.vue'
+import RecuperacaoSenhaSucesso from './components/login/esquecimento-senha/RecuperacaoSenhaSucesso.vue'
+
+/* Troca de senha */
+import TrocaSenha from './components/login/troca-senha/TrocaSenha.vue'
+import TrocaSenhaSucesso from './components/login/troca-senha/TrocaSenhaSucesso.vue'
+
+/* Items compartilhados */
+import ListaItemCompartilhado from './components/item/ListaItemCompartilhado.vue'
+import AtualizaItemCompartilhado from './components/item/AtualizaItemCompartilhado.vue'
+import NovoItemCompartilhado from './components/item/NovoItemCompartilhado.vue'
 
 Vue.use(Router)
 
 const router = new Router({
- routes: [
+  mode: 'history',
+  routes: [
    {
      path: '/',
      name: 'home',
@@ -31,32 +42,58 @@ const router = new Router({
    {
     path: '/login/new',
     name: 'create-account',
-    component: CreateAccount,
+    component: CriacaoConta,
   },
   {
    path: '/login/account-created',
    name: 'account-created',
-   component: AccountCreated,
+   component: CriacaoContaSucesso,
   },
   {
     path: '/login/forgot',
     name: 'forgot-password',
-    component: ForgotPassword,
+    component: EsquecimentoSenha,
   },
   {
     path: '/login/token-sent',
     name: 'token-sent',
-    component: TokenSent,
+    component: EsquecimentoSenhaSucesso,
   },  
   {
     path: '/login/reset',
     name: 'reset-password',
-    component: ResetPassword,
+    component: RecuperacaoSenha,
   },
   {
     path: '/login/reseted',
     name: 'password-reseted',
-    component: ResetedPassword,
+    component: RecuperacaoSenhaSucesso,
+  },  
+  {
+    path: '/login/change',
+    name: 'change-password',
+    component: TrocaSenha,
+  },
+  {
+    path: '/login/changed',
+    name: 'password-changed',
+    component: TrocaSenhaSucesso,
+  },
+  {
+    path: '/item/list',
+    name: 'item-list',
+    component: ListaItemCompartilhado,
+  },
+  {
+    path: '/item/update',
+    name: 'item-update',
+    component: AtualizaItemCompartilhado,
+    props: true
+  },
+  {
+    path: '/item/new',
+    name: 'item-new',
+    component: NovoItemCompartilhado,
   },
 ]
 })
