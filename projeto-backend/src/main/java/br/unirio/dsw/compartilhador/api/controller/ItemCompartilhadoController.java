@@ -128,11 +128,9 @@ public class ItemCompartilhadoController
         item.setDescricao(form.getDescricao());
         item.setTipo(tipo);
         item.setUsuario(usuario);
-        item.setNumeroUnidades(1);
         itemRepositorio.save(item);
 		return ControllerResponse.success();
 	}
-	
 	
 	/**
 	 * Ação que atualiza os dados de um item compartilhado

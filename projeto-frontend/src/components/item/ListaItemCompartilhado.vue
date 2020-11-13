@@ -113,7 +113,10 @@ export default {
     },
 
     remove: function(item) {
-      alert('Remove item #'+ item.id);
+      this.$router.push({
+          name: 'item-delete',
+          params: { item: item }
+      });
     }
   }
 }

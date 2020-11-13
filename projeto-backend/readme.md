@@ -21,3 +21,5 @@ Retornar Forbidden (403) porque o CSRF está ligado por default. Precisa desliga
 * trim nos campos dos itens compartilhados antes de aplicar as regras de negócio
 
 * Remoção de item compartilhado, com confirmação
+
+* Remover o número de unidades do item compartilhado

@@ -21,8 +21,9 @@ import TrocaSenhaSucesso from './components/login/troca-senha/TrocaSenhaSucesso.
 
 /* Items compartilhados */
 import ListaItemCompartilhado from './components/item/ListaItemCompartilhado.vue'
-import AtualizaItemCompartilhado from './components/item/AtualizaItemCompartilhado.vue'
 import NovoItemCompartilhado from './components/item/NovoItemCompartilhado.vue'
+import AtualizaItemCompartilhado from './components/item/AtualizaItemCompartilhado.vue'
+import RemoveItemCompartilhado from './components/item/RemoveItemCompartilhado.vue'
 
 Vue.use(Router)
 
@@ -94,6 +95,12 @@ const router = new Router({
     path: '/item/new',
     name: 'item-new',
     component: NovoItemCompartilhado,
+  },
+  {
+    path: '/item/delete',
+    name: 'item-delete',
+    component: RemoveItemCompartilhado,
+    props: true
   },
 ]
 })

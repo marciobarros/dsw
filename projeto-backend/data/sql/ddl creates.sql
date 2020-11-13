@@ -7,8 +7,8 @@ USE UnirioCompartilhamento;
 CREATE TABLE Usuario
 (
     id INT NOT NULL AUTO_INCREMENT,
-	data_registro TIMESTAMP NULL,
-	data_atualizacao TIMESTAMP NULL,
+    data_registro TIMESTAMP NULL,
+    data_atualizacao TIMESTAMP NULL,
     nome VARCHAR(80) NOT NULL,
     email VARCHAR(80) NOT NULL,
     senha VARCHAR(80) NOT NULL,
@@ -26,13 +26,12 @@ CREATE TABLE Usuario
 CREATE TABLE ItemCompartilhado
 (
     id INT NOT NULL AUTO_INCREMENT,
- 	data_registro TIMESTAMP NULL,
-	data_atualizacao TIMESTAMP NULL,
+    data_registro TIMESTAMP NULL,
+    data_atualizacao TIMESTAMP NULL,
     usuario_id INT NOT NULL,
-	nome VARCHAR(80) NOT NULL,
+    nome VARCHAR(80) NOT NULL,
     descricao VARCHAR(4096) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
-    numero_unidades INT NOT NULL,
     removido BIT NOT NULL,
     
     CONSTRAINT pkItemCompartilhado PRIMARY KEY(id),
@@ -42,16 +41,16 @@ CREATE TABLE ItemCompartilhado
 CREATE TABLE Compartilhamento
 (
     id INT NOT NULL AUTO_INCREMENT,
- 	data_registro TIMESTAMP NULL,
-	data_atualizacao TIMESTAMP NULL,
+    data_registro TIMESTAMP NULL,
+    data_atualizacao TIMESTAMP NULL,
     usuario_id INT NOT NULL,
     item_id INT NOT NULL,
-	data_inicio TIMESTAMP NULL,
-	data_termino TIMESTAMP NULL,
-	aceito BIT NOT NULL DEFAULT 0,
-	rejeitado BIT NOT NULL DEFAULT 0,
-	cancelado_dono BIT NOT NULL DEFAULT 0,
-	cancelado_usuario BIT NOT NULL DEFAULT 0,
+    data_inicio TIMESTAMP NULL,
+    data_termino TIMESTAMP NULL,
+    aceito BIT NOT NULL DEFAULT 0,
+    rejeitado BIT NOT NULL DEFAULT 0,
+    cancelado_dono BIT NOT NULL DEFAULT 0,
+    cancelado_usuario BIT NOT NULL DEFAULT 0,
     
     CONSTRAINT pkCompartilhamento PRIMARY KEY(id),
     CONSTRAINT fkUsuarioCompartilhamento FOREIGN KEY(usuario_id) REFERENCES Usuario(id),

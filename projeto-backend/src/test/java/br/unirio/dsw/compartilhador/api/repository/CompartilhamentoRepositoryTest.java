@@ -121,7 +121,6 @@ public class CompartilhamentoRepositoryTest
 		item.setDescricao("Descrição do " + nome.toLowerCase());
 		item.setUsuario(usuario);
 		item.setTipo(TipoItemCompartilhado.UNICO);
-		item.setNumeroUnidades(1);
 		item.setRemovido(false);
 		this.itemCompartilhadoRepository.save(item);
 		return item;

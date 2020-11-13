@@ -37,7 +37,6 @@ public class ItemCompartilhado implements Serializable
 	private String nome;
 	private String descricao;
 	private TipoItemCompartilhado tipo;
-	private int numeroUnidades;
 	private boolean removido;
 	private List<Compartilhamento> compartilhamentos;
 	
@@ -118,17 +117,6 @@ public class ItemCompartilhado implements Serializable
 	public void setTipo(TipoItemCompartilhado tipo)
 	{
 		this.tipo = tipo;
-	}
-
-	@Column(name="numero_unidades", nullable=false)
-	public int getNumeroUnidades()
-	{
-		return numeroUnidades;
-	}
-
-	public void setNumeroUnidades(int numeroUnidades)
-	{
-		this.numeroUnidades = numeroUnidades;
 	}
 
 	@Column(name="removido", nullable=false)
