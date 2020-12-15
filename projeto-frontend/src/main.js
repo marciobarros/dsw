@@ -19,7 +19,7 @@ import RecuperacaoSenhaSucesso from './components/login/esquecimento-senha/Recup
 import TrocaSenha from './components/login/troca-senha/TrocaSenha.vue'
 import TrocaSenhaSucesso from './components/login/troca-senha/TrocaSenhaSucesso.vue'
 
-/* Items compartilhados */
+/* Itens compartilhados */
 import ListaItemCompartilhado from './components/item/ListaItemCompartilhado.vue'
 import NovoItemCompartilhado from './components/item/NovoItemCompartilhado.vue'
 import AtualizaItemCompartilhado from './components/item/AtualizaItemCompartilhado.vue'
