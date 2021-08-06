@@ -1,0 +1,125 @@
+<html>
+<head>
+    <style>
+        #myChart { width: 100%; height: 600px; }
+        select { margin-right: 32px; }
+        input { margin-right: 32px; }
+    </style>
+</head>
+
+<body>
+    <label for="ticker">Ticker:</label>
+    <select id="ticker">
+        <option value="">Select a ticker</option>
+        <option value="gold">Gold</option>
+        <option value="wti">Petroleum WTI</option>
+        <option value="brent">Petroleum Brent</option>
+    </select>
+
+    <label for="from">From:</label>
+    <input id="from" name="from" placeholder="YYYY-MM-DD" value="1950-01-01"/>
+
+    <label for="to">To:</label>
+    <input id="to" name="to" placeholder="YYYY-MM-DD" value="2021-01-01"/>
+
+    <button onclick="javascript:update()">Go!</button>
+
+    <div id="myChart"></div>
+    <script src="https://cdn.plot.ly/plotly-2.3.0.min.js"></script>
+</body>
+
+<script type="text/javascript">
+//
+// Cria um web worker para atualizar os preços de um ticker
+//
+function updatePrices(ticker) {
+    const local_signature = localStorage.getItem(ticker + ".signature");
+    var worker = new Worker('update-prices.js');
+
+    worker.addEventListener('message', function(e) {
+        if (e.data.signature && e.data.contents) {
+            localStorage.setItem(ticker + ".signature", e.data.signature);
+            localStorage.setItem(ticker + ".contents", JSON.stringify(e.data.contents));
+        }
+        else {
+            console.log("Erro de carga da assinatura ou do conteúdo do ticker '" + ticker + "'.")
+        }
+    }, false);
+
+  worker.postMessage({ ticker: ticker, signature: local_signature });
+}
+
+//
+// Pega os dados de um ticker para traçar um gráfico
+//
+function getChartData(ticker) {
+    var contents = localStorage.getItem(ticker + ".contents");
+    return JSON.parse(contents);
+}
+
+//
+// Pega as datas de um ticker para traçar um gráfico
+//
+function getLabels(data, from, to) {
+    var labels = [];
+
+    data.forEach(element => {
+        if (element.date >= from && element.date <= to) {
+            labels.push(element.date);
+        }
+    });
+
+    return labels;
+}
+
+//
+// Pega os preços de um ticker para traçar um gráfico
+//
+function getPrices(data, from, to) {
+    var prices = [];
+
+    data.forEach(element => {
+        if (element.date >= from && element.date <= to) {
+            prices.push(element.price);
+        }
+    });
+
+    return prices;
+}
+
+//
+// Atualiza o gráfico de um ticker em um período
+//
+function updateChart(ticker, from, to) {
+    var data = getChartData(ticker);
+    var labels = getLabels(data, from, to);
+    var prices = getPrices(data, from, to);
+
+    var trace = {
+        x: labels,
+        y: prices,
+        type: 'scatter'
+    };
+
+    Plotly.newPlot('myChart', [trace]);
+}
+
+//
+// Evento disparado pelo click no botão Go!
+//
+function update() {
+    var ticker = document.getElementById("ticker").value;
+    var from = document.getElementById("from").value;
+    var to = document.getElementById("to").value;
+    updateChart(ticker, from, to);
+}
+
+//
+// Programa principal
+//
+updatePrices("gold");
+updatePrices("wti");
+updatePrices("brent");
+
+</script>
+</html>

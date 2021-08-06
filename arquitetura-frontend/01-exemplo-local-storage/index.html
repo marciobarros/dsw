@@ -1,0 +1,22 @@
+<html>
+<head>
+</head>
+<body>
+    <h1>Este é um arquivo HTML muito tímido.</h1>
+    <p>Aba o console para ver o resultado do processamento.</p>
+</body>
+
+<script type="text/javascript">
+    console.log('Consultando o local storage ...');
+    const itemValue = localStorage.getItem('item');
+
+    if (itemValue) {
+        console.log('Encontrei ' + itemValue + ' ...');
+    }
+    else {
+        console.log('Não encontrei o valor ...');
+        localStorage.setItem('item', 'Hello!');
+        console.log('Valor armazenado ...');
+    }
+</script>
+</html>
