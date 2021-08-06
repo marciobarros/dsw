@@ -39,4 +39,5 @@ projeto-backend/mvnw.cmd
 projeto-backend/HELP.md
 projeto-backend/src/main/resources/application.properties
 
-node_modules/*
+arquitetura-frontend/gerador-hash/package-lock.json
+arquitetura-frontend/gerador-hash/node_modules/*
