@@ -26,7 +26,7 @@ hs_err_pid*
 jpa-exemplos/target
 
 # Arquitetura
-arquitetura-frontend/gerador-hash/node_modules
+arquitetura-frontend/gerador-hash/node_modules/
 
 # Front-end
 projeto-frontend/node_modules
