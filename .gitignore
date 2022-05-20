@@ -25,6 +25,9 @@ hs_err_pid*
 # JPA-examples
 jpa-exemplos/target
 
+# Arquitetura
+arquitetura-frontend/gerador-hash/node_modules
+
 # Front-end
 projeto-frontend/node_modules
 projeto-frontend/package-lock.json

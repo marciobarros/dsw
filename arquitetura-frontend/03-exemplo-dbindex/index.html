@@ -37,9 +37,8 @@ function updatePrices(ticker) {
     var worker = new Worker('update-prices.js');
 
     worker.addEventListener('message', function(e) {
-        if (e.data.signature && e.data.contents) {
+        if (e.data.signature) {
             localStorage.setItem(ticker + ".signature", e.data.signature);
-            localStorage.setItem(ticker + ".contents", JSON.stringify(e.data.contents));
         }
         else {
             console.log("Erro de carga da assinatura ou do conteúdo do ticker '" + ticker + "'.")
@@ -50,50 +49,11 @@ function updatePrices(ticker) {
 }
 
 //
-// Pega os dados de um ticker para traçar um gráfico
-//
-function getChartData(ticker) {
-    var contents = localStorage.getItem(ticker + ".contents");
-    return JSON.parse(contents);
-}
-
-//
-// Pega as datas de um ticker para traçar um gráfico
-//
-function getLabels(data, from, to) {
-    var labels = [];
-
-    data.forEach(element => {
-        if (element.date >= from && element.date <= to) {
-            labels.push(element.date);
-        }
-    });
-
-    return labels;
-}
-
-//
-// Pega os preços de um ticker para traçar um gráfico
-//
-function getPrices(data, from, to) {
-    var prices = [];
-
-    data.forEach(element => {
-        if (element.date >= from && element.date <= to) {
-            prices.push(element.price);
-        }
-    });
-
-    return prices;
-}
-
-//
 // Atualiza o gráfico de um ticker em um período
 //
-function updateChart(ticker, from, to) {
-    var data = getChartData(ticker);
-    var labels = getLabels(data, from, to);
-    var prices = getPrices(data, from, to);
+function updateChart(e) {
+    var labels = e.data.map(element => element.date);
+    var prices = e.data.map(element => element.price);
 
     var trace = {
         x: labels,
@@ -111,7 +71,10 @@ function update() {
     var ticker = document.getElementById("ticker").value;
     var from = document.getElementById("from").value;
     var to = document.getElementById("to").value;
-    updateChart(ticker, from, to);
+
+    var worker = new Worker('query-prices.js');
+    worker.addEventListener('message', updateChart, false);
+    worker.postMessage({ ticker: ticker, from: from, to: to });
 }
 
 //
