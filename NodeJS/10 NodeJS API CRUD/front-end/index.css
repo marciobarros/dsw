@@ -1,0 +1,63 @@
+.filter-section {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    margin: 12px 0px;
+}
+
+.filter-section label {
+    font-size: 10px;
+    display: block
+}
+
+.filter-section input {
+    border: 1px solid #ccc;
+    background-color: white
+}
+
+p.view-label {
+    margin-bottom: 0px;
+    margin-top: 24px;
+    font-size: 12px;
+    color: navy;
+}
+
+label.form-label {
+    display: block;
+    font-size: 12px;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}
+
+input.form-input {
+    border: 1px solid lightgray;
+    width: 40%;
+}
+
+textarea.form-input {
+    border: 1px solid lightgray;
+    width: 40%;
+}
+
+div.v-data-table {
+    border-top: 1px solid #eee;
+}
+
+div.detail-form {
+    background: #eee;
+    border: 1px solid #ccc;
+    padding: 8px;
+    height: 100%;
+}
+
+div.detail-form input {
+    width: 100%;
+    min-width: 200px;
+    background: white;
+}
+
+p.error {
+    padding: 4px 8px;
+    border: darkred;
+    color: white;
+}

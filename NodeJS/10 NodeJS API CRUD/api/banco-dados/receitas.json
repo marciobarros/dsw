@@ -1,0 +1,672 @@
+[
+    {
+        "id": 1,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 2,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 3,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 4,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 5,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 6,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 7,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 8,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 9,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 10,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 11,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 12,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 13,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 14,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 15,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 16,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 17,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 18,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 19,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 20,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 21,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 22,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 23,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 24,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 25,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 26,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 27,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    },
+    {
+        "id": 28,
+        "nome": "Bolo de cenoura", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "cenouras",
+            "qtde": "3 unidades"
+        },
+        {
+            "item": "óleo",
+            "qtde": "1 xícara de chá"
+        },
+        {
+            "item": "açúcar",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "ovos",
+            "qtde": "4 unidades"
+        },
+        {
+            "item": "sal",
+            "qtde": "1 pitada"
+        },
+        {
+            "item": "farinha de trigo",
+            "qtde": "2 xícaras de chá"
+        },
+        {
+            "item": "fermento",
+            "qtde": "1 colher de sopa"
+        }]
+    },
+    { 
+        "id": 29,
+        "nome": "Calda de chocolate", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "açúcar",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "achocolatado",
+            "qtde": "6 colheres de sopa"
+        },
+        {
+            "item": "manteiga",
+            "qtde": "3 colheres de sopa"
+        },
+        {
+            "item": "leite",
+            "qtde": "2 colheres de sopa"
+        }]
+    },
+    { 
+        "id": 30,
+        "nome": "Arroz com feijão", 
+        "preparo": "sem informacoes", 
+        "ingredientes": [{ 
+            "item": "arroz",
+            "qtde": "200 gramas"
+        },
+        {
+            "item": "feijão preto",
+            "qtde": "200 gramas"
+        }]
+    }
+]

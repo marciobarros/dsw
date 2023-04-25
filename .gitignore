@@ -45,6 +45,8 @@ projeto-backend/src/main/resources/application.properties
 arquitetura-frontend/gerador-hash/package-lock.json
 arquitetura-frontend/gerador-hash/node_modules/*
 
-NodeJS/*/node_modules
+NodeJS/*/node_modules/
 NodeJS/*/package-lock.json
+NodeJS/10 NodeJS API CRUD/api/node_modules/
+NodeJS/10 NodeJS API CRUD/api/package-lock.json
 
