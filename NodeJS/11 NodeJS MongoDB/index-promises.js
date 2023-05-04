@@ -13,9 +13,7 @@ mongoose.connect(url).then(() => {
 			qtde : Number
 		}]
 	});
-		
-    console.log("2");
-    
+		    
     const primeira = new Receita({
 		prato: "Arroz com feijão",
 		descricao: "cozinhe o arroz por ...",
@@ -27,11 +25,8 @@ mongoose.connect(url).then(() => {
 			qtde: 200
 		}]
 	});
-
-    console.log("3");
     
     primeira.save().then(() => {
-        console.log("4");
         db.close();
     });
 });

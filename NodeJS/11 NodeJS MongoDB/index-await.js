@@ -16,9 +16,7 @@ async function main() {
 			qtde : Number
 		}]
 	});
-			
-	console.log("2");
-	
+				
 	const primeira = new Receita({
 		prato: "Arroz com feijão",
 		descricao: "cozinhe o arroz por ...",
@@ -30,11 +28,8 @@ async function main() {
 			qtde: 200
 		}]
 	});
-
-	console.log("3");
 	
 	await primeira.save();
-	console.log("4");
 	db.close();
 }
 
