@@ -29,18 +29,15 @@
         <v-main>
             <v-container>
                 <div v-show="controladorCadastroReceitas.apresentandoPainelLista">
-                    <lista-receitas :controlador="controladorCadastroReceitas" ref="lista">
-                    </lista-receitas>
+                    <lista-receitas :controlador="controladorCadastroReceitas" ref="lista"></lista-receitas>
                 </div>
 
                 <div v-show="controladorCadastroReceitas.apresentandoPainelFormulario">
-                    <formulario-receita :controlador="controladorCadastroReceitas" ref="formulario">
-                    </formulario-receita>
+                    <formulario-receita :controlador="controladorCadastroReceitas" ref="formulario"></formulario-receita>
                 </div>
 
                 <div v-show="controladorCadastroReceitas.apresentandoPainelRemocao">
-                    <deleta-receita :controlador="controladorCadastroReceitas">
-                    </deleta-receita>
+                    <deleta-receita :controlador="controladorCadastroReceitas"></deleta-receita>
                 </div>
             </v-container>
         </v-main>
@@ -54,10 +51,10 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="controlador-crud.js"></script>
-  <script src="receita-lista.js"></script>
-  <script src="receita-form.js"></script>
-  <script src="receita-remove.js"></script>
+  <script src="crud/utils/controlador-crud.js"></script>
+  <script src="crud/receitas/receita-lista.js"></script>
+  <script src="crud/receitas/receita-form.js"></script>
+  <script src="crud/receitas/receita-remove.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

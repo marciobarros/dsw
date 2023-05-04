@@ -36,18 +36,18 @@ Vue.component('lista-receitas', {
                     <v-col cols="12">
                         <div class="filter-section">
                             <label for="filter-nome">Nome:</label>
-                            <input name="filter-nome" v-model="filtroNome" @keyup="carregaReceitas"/>
+                            <input name="filter-nome" v-model="filtroNome" @keyup="atualizaLista"/>
                         </div>
 
                         <v-data-table
                             :headers="headers"
                             :items="items"
-                            :items-per-page="5"
                             :loading="loading"
                             :options.sync="options"
                             :server-items-length="totalItems"
                             class="elevation-1"
-                            loading-text="Carregando os dados ... Por favor, aguarde.">
+                            loading-text="Carregando os dados ... Por favor, aguarde."
+                            @update:options="atualizaLista">
 
                             <template v-slot:item.actions="{item}">
                                 <div class="text-right">
@@ -61,17 +61,8 @@ Vue.component('lista-receitas', {
             </v-container>
         </div>`,
 
-    watch: {
-        options: {
-            handler() {
-                this.carregaReceitas();
-            },
-            deep: true,
-        }
-    },
-
     methods: {
-        carregaReceitas: function() {
+        atualizaLista: function() {
             this.loading = true;
 
             var sortBy = (this.options.sortBy && this.options.sortBy.length > 0) ? this.options.sortBy[0] : "";
@@ -88,17 +79,14 @@ Vue.component('lista-receitas', {
         },
 
         novaReceita: function() {
-            //this.$emit('nova', { id: -1, nome: '', preparo: '', ingredientes: [] });
             this.controlador.insere({ id: -1, nome: '', preparo: '', ingredientes: [] });
         },
 
         editaReceita: function(item) {
-            //this.$emit('edita', item);
             this.controlador.edita(item);
         },
 
         removeReceita: function(item) {
-            //this.$emit('remove', item);
             this.controlador.remove(item);
         }
     }

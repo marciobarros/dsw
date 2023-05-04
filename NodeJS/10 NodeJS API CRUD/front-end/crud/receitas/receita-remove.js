@@ -14,11 +14,11 @@ Vue.component('deleta-receita', {
         <div>
             <v-container>
                 <v-row>
-                    <v-col cols="9">
+                    <v-col cols="6">
                         <h2>Remove receita</h2>
                     </v-col>
-                    <v-col cols="3" class="text-right">
-                        <v-btn color="primary" class="mb-2" @click="removeReceita">
+                    <v-col cols="6" class="text-right">
+                        <v-btn color="error" class="mb-2" @click="removeReceita">
                             Remove
                         </v-btn>
                         <v-btn color="outlined" class="mb-2" @click="retornaLista">

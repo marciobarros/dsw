@@ -13,7 +13,7 @@ function criaControladorCRUD() {
         itemSelecionado: { },
 
         lista: function() {
-            this.painelLista.carregaReceitas();
+            this.painelLista.atualizaLista();
             this.apresentandoPainelLista = true;
             this.apresentandoPainelFormulario = false;
             this.apresentandoPainelRemocao = false;

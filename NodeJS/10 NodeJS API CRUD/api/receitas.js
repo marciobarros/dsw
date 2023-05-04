@@ -18,9 +18,9 @@ router.get('/', function(req, res){
 
     var receitasFiltradas = aplicaFiltro(receitas, filter);
     ordenaReceitas(receitasFiltradas, sortField, sortDesc);
-    receitasFiltradas = selecionaPagina(receitasFiltradas, page, itemsPerPage);
+    receitasPagina = selecionaPagina(receitasFiltradas, page, itemsPerPage);
 
-    res.json({ items: receitasFiltradas, totalItems: receitas.length });
+    res.json({ items: receitasPagina, totalItems: receitasFiltradas.length });
 });
 
 
@@ -31,7 +31,7 @@ function aplicaFiltro(receitas, filter) {
     var receitasFiltradas = [];
 
     for (var receita of receitas) {
-        if (receita.nome.includes(filter)) {
+        if (receita.nome.toUpperCase().includes(filter.toUpperCase())) {
             receitasFiltradas.push(receita);
         }
     }
@@ -110,8 +110,6 @@ function verificaRegrasNegocio(id, nome, preparo, ingredientes, res) {
         res.status(400).json({message: "O nome da receita não pode ser vazio."});
         return false;
     }
-
-    // TODO: receitas com nome duplicado
 
     if (!preparo || preparo.length == 0) {
         res.status(400).json({message: "O modo de preparo da receita não pode ser vazio."});
@@ -208,7 +206,7 @@ router.delete('/:id', function(req, res) {
     }
 
     receitas.splice(indice, 1);
-    res.send({message: "Receita ID " + req.params.id + " removida."});
+    res.json({message: "Receita ID " + req.params.id + " removida."});
 });
 
 
