@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">  
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+        <v-navigation-drawer app v-model="drawer">
+            <v-list nav dense>
+                <v-list-item-group active-class="deep-purple--text text--accent-4">
+                    <v-list-item>
+                        <v-list-item-title @click="controladorCadastroReceitas.lista()">Receitas</v-list-item-title>
+                    </v-list-item>
+                </v-list-item-group>
+            </v-list>
+        </v-navigation-drawer>
+        
+        <v-app-bar app color="deep-purple accent-4" dark>
+            <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
+            <v-toolbar-title>Minha primeira aplicação com MongoDB</v-toolbar-title>
+        </v-app-bar>
+    
+        <v-main>
+            <v-container>
+                <div v-show="controladorCadastroReceitas.apresentandoPainelLista">
+                    <lista-receitas :controlador="controladorCadastroReceitas" ref="lista"></lista-receitas>
+                </div>
+
+                <div v-show="controladorCadastroReceitas.apresentandoPainelFormulario">
+                    <formulario-receita :controlador="controladorCadastroReceitas" ref="formulario"></formulario-receita>
+                </div>
+
+                <div v-show="controladorCadastroReceitas.apresentandoPainelRemocao">
+                    <deleta-receita :controlador="controladorCadastroReceitas"></deleta-receita>
+                </div>
+            </v-container>
+        </v-main>
+    
+        <v-footer app>
+            @BSI UNIRIO: Desenvolvimento de Servidor Web @2023
+        </v-footer>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="crud/utils/controlador-crud.js"></script>
+  <script src="crud/receitas/receita-lista.js"></script>
+  <script src="crud/receitas/receita-form.js"></script>
+  <script src="crud/receitas/receita-remove.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
