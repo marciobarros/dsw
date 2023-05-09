@@ -1,0 +1,16 @@
+h2.form-title {
+    margin-bottom: 0px;
+    color: #36c;
+}
+
+h6.form-subtitle {
+    margin-bottom: 32px;
+    color: #777;
+    line-height: 1.5em;
+    text-align: justify;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: yellow !important;
+}
