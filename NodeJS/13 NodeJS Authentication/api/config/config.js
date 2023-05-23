@@ -14,7 +14,7 @@ module.exports = {
     },
 
     sendGrid: {
-        apiKey: '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',
+        apiKey: 'sendgrid-api-key',
         email: 'marcio.barros@uniriotec.br'
     }
 }
