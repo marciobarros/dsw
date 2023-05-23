@@ -1,28 +1,20 @@
 <template lang="html">
-  <div class="conta-criada row">
-    <div class="col-md-4 col-md-offset-4 text-left">
+  <v-row v-show="!$root.credentials" class="mt-8">
+    <v-col offset-md="4" md="4">
       <h2 class="form-title">Conta registrada!</h2>
-      <h6 class="form-subtitle">Faça o login para entrar no sistema.</h6>
-      
-      <div class="link-login">
+      <h5 class="form-subtitle mb-8">Faça o login para entrar no sistema.</h5>
+
+      <div class="mt-12">
         <router-link class="link" :to="{ name: 'login' }">
           Ir para a página de login.
         </router-link>
       </div>
-    </div>
-  </div>
+    </v-col>
+  </v-row>
 </template>
+
 
 <script>
   export default {
   }
 </script>
-
-<style lang="css" scoped>
-div.conta-criada {
-  margin-top: 32px;
-}
-div.link-login {
-  margin-top: 32px;
-}
-</style>

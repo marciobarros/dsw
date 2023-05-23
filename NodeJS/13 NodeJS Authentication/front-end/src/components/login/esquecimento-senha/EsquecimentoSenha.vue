@@ -4,12 +4,10 @@
       <h2 class="form-title">Recuperar senha</h2>
       <h5 class="form-subtitle mb-8">Entre com o seu e-mail no formulário abaixo. Um link para troca de senha será enviado por e-mail.</h5>
 
-      <v-form @submit.prevent="processForm">
-        <div class="form-group">
-          <v-text-field v-model="form.email" label="Entre o seu e-mail" ></v-text-field>
-          <span class="error" v-if="error.email">{{error.email}}</span>
-        </div>
+      <p class="error pa-1 mb-8" v-if="error">{{error}}</p>
 
+      <v-form @submit.prevent="processForm">
+        <v-text-field v-model="form.email" label="Entre o seu e-mail" ></v-text-field>
         <v-btn type="submit" class="primary">Envia</v-btn>
       </v-form>
 
@@ -35,33 +33,26 @@
     data() {
       return {
         form: { email: "" },
-        error: { }
+        error: ''
       }
     },
 
     methods: {
       processForm: function() {
-        axios.post(this.$root.config.url + "/api/usuario/esqueci", this.form)
+        axios.post(this.$root.config.url + "/usuarios/esqueci", this.form)
           .then(() => {
             this.$router.replace('token-sent');
-            this.error = {};
+            this.error = '';
           })
           .catch(error => {
-            this.error = error.response.data.errors;
+            if (error.response) {
+              this.error = error.response.data.message;
+            }
+            else {
+              this.error = 'Ocorreu um problema ao enviar o e-mail de recuperação de senha.';
+            }
           })
       }
     }
   }
 </script>
-
-<style lang="css" scoped>
-div.recuperacao-senha {
-  margin-top: 32px;
-}
-div.link-login {
-  margin-top: 32px;
-}
-div.link-criar-conta {
-  margin-top: 8px;
-}
-</style>

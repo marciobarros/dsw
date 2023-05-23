@@ -3,6 +3,7 @@
     <v-col offset-md="4" md="4">
       <h2 class="form-title">Login</h2>
       <h5 class="form-subtitle mb-8">Entre com as suas credenciais para o login.</h5>
+
       <p class="error pa-1 mb-8" v-if="error">{{error}}</p>
 
       <v-form @submit.prevent="processForm">

@@ -4,22 +4,12 @@
       <h2 class="form-title">Troca de senha</h2>
       <h5 class="form-subtitle mb-8">Entre com a senha atual e a nova senha no formulário abaixo.</h5>
       
+      <p class="error pa-1 mb-8" v-if="error">{{error}}</p>
+
       <v-form @submit.prevent="processForm">
-        <div class="form-group">
-          <v-text-field v-model="form.senhaAntiga" type="password" label="Entre com a senha atual" ></v-text-field>
-          <span class="error" v-if="error.senhaAntiga">{{error.senhaAntiga}}</span>
-        </div>
-
-        <div class="form-group">
-          <v-text-field v-model="form.senhaNova" type="password" label="Entre com uma senha nova" ></v-text-field>
-          <span class="error" v-if="error.senhaNova">{{error.senhaNova}}</span>
-        </div>
-
-        <div class="form-group">
-          <v-text-field v-model="form.senhaNovaRepetida" type="password" label="Repita a sua senha nova" ></v-text-field>
-          <span class="error" v-if="error.senhaNovaRepetida">{{error.senhaNovaRepetida}}</span>
-        </div>
-
+        <v-text-field v-model="form.senhaAntiga" type="password" label="Entre com a senha atual" ></v-text-field>
+        <v-text-field v-model="form.senhaNova" type="password" label="Entre com uma senha nova" ></v-text-field>
+        <v-text-field v-model="form.senhaNovaRepetida" type="password" label="Repita a sua senha nova" ></v-text-field>
         <v-btn type="submit" class="primary">Troca Senha</v-btn>
       </v-form>
     </v-col>
@@ -32,9 +22,13 @@
   export default {
     data() {
       return {
-        form: { token: this.$route.query.token, senhaAntiga: "", senhaNova: "", senhaNovaRepetida: "" },
+        form: { 
+          senhaAntiga: "", 
+          senhaNova: "", 
+          senhaNovaRepetida: "" 
+        },
 
-        error: { },
+        error: '',
         
         httpOptions: {
             baseURL: this.$root.config.url,
@@ -49,13 +43,13 @@
 
     methods: {
       processForm: function() {
-        axios.post(this.$root.config.url + "/api/usuario/trocaSenha", this.form, this.httpOptions)
+        axios.post(this.$root.config.url + "/usuarios/trocaSenha", this.form, this.httpOptions)
           .then(() => {
             this.$router.replace('changed');
-            this.error = {};
+            this.error = '';
           })
           .catch(error => {
-            this.error = error.response.data.errors;
+            this.error = error.response.data.message;
           });
       }
     }

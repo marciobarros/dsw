@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import Router from 'vue-router'
+import ControladorCRUD from './assets/controlador-crud.js'
 
 /* Login e homepage */
 import HomePage from './components/HomePage.vue'
@@ -21,6 +22,15 @@ import RecuperacaoSenhaSucesso from './components/login/esquecimento-senha/Recup
 import TrocaSenha from './components/login/troca-senha/TrocaSenha.vue'
 import TrocaSenhaSucesso from './components/login/troca-senha/TrocaSenhaSucesso.vue'
 
+/* Receitas */
+import ReceitaLista from './components/receitas/ReceitaLista.vue'
+import ReceitaFormulario from './components/receitas/ReceitaFormulario.vue'
+import ReceitaRemove from './components/receitas/ReceitaRemove.vue'
+
+/* Controlador do cadastro de receitas */
+var controladorCadastroReceitas = ControladorCRUD.criaControladorCRUD();
+
+/* Configuracao do router */
 Vue.config.productionTip = false
 Vue.use(Router)
 
@@ -76,9 +86,28 @@ const router = new Router({
     path: '/login/changed',
     name: 'password-changed',
     component: TrocaSenhaSucesso,
+  },
+  {
+    path: '/receitas',
+    name: 'receitas-lista',
+    component: ReceitaLista, 
+    props: { 'controlador': controladorCadastroReceitas },
+  },
+  {
+    path: '/receitas/edit',
+    name: 'receitas-form',
+    component: ReceitaFormulario, 
+    props: { 'controlador': controladorCadastroReceitas },
+  },
+  {
+    path: '/receitas/view',
+    name: 'receitas-remove',
+    component: ReceitaRemove, 
+    props: { 'controlador': controladorCadastroReceitas },
   }
 ]})
 
+/* Configuracao do Vue JS */
 new Vue({
   data: {
     credentials: null,

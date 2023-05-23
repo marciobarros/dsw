@@ -3,16 +3,18 @@ var router = express.Router();
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
+const crypto = require('crypto')
 
 const mongoose = require('mongoose');
-const config = require('../config/database.js');
+const config = require('../config/config.js');
 const models = require('../model/models.js');
 const auth = require("../auth/auth.js");
 
 
-/*
- * Retorna a lista paginada de receitas
- */
+//
+// ENDPOINT: retorna uma lista paginada de usuarios
+//
 router.get('/', async function(req, res){
     var page = req.query.page || 1;
     var itemsPerPage = req.query.itemsPage || 5;
@@ -28,9 +30,9 @@ router.get('/', async function(req, res){
 });
 
 
-/*
- * Retorna uma receita, dado o seu ID
- */
+//
+// ENDPOINT: retorna um usuário, dado o seu ID
+//
 router.get('/:id', async function(req, res){
     var db = await models.connect();
     var usuario = await db.Usuario.findById(req.params.id);
@@ -38,122 +40,9 @@ router.get('/:id', async function(req, res){
 });
 
 
-/*
- * Insere ou atualiza uma receita
- */
-/*router.post('/', async function(req, res){
-    var id = req.body._id;
-    var nome = req.body.nome;
-    var preparo = req.body.preparo;
-    var ingredientes = req.body.ingredientes;
-
-    if (verificaRegrasNegocio(nome, preparo, ingredientes, res)) {
-        if (id == "") {
-            insereReceita(nome, preparo, ingredientes, res);
-        }
-        else {
-            atualizaReceita(id, nome, preparo, ingredientes, res);
-        }
-    }
-});*/
-
-
-/*
- * Verifica as regras de negócio em uma nova receita
- */
-/*function verificaRegrasNegocio(nome, preparo, ingredientes, res) {
-
-    if (!nome || nome.length == 0) {
-        res.status(400).json({message: "O nome da receita não pode ser vazio."});
-        return false;
-    }
-
-    if (!preparo || preparo.length == 0) {
-        res.status(400).json({message: "O modo de preparo da receita não pode ser vazio."});
-        return false;
-    }
-
-    if (!ingredientes || ingredientes.length == 0) {
-        res.status(400).json({message: "A receita deve ter ao menos um ingrediente."});
-        return false;
-    }
-
-    for (var ingrediente of ingredientes) {
-        var item = ingrediente.item;
-
-        if (!item || item.length == 0) {
-            res.status(400).json({message: "Ao menos um ingrediente da receita está com nome vazio."});
-            return false;
-        }
-
-        var qtde = ingrediente.qtde;
-
-        if (!qtde || qtde.length == 0) {
-            res.status(400).json({message: "Ao menos um ingrediente da receita está sem quantidade especificada."});
-            return false;
-        }
-    }
-
-    return true;
-}*/
-
-
-/*
- * Insere uma receita no conjunto conhecido
- */
-/*async function insereReceita(nome, preparo, ingredientes, res) {
-    var db = await connect();
-    var receita = await db.Receita.create(receita);
-    receita.nome = nome;
-    receita.preparo = preparo;
-    receita.ingredientes = ingredientes;
-	await receita.save();
-    res.json({message: "A nova receita foi criada.", location: "/receitas/" + receita._id});
-}*/
-
-
-/*
- * Atualiza os dados de uma receita
- */
-/*async function atualizaReceita(id, nome, preparo, ingredientes, res) {
-    var db = await connect();
-    var receita = await db.Receita.findById(id);
-    receita.nome = nome;
-    receita.preparo = preparo;
-    receita.ingredientes = ingredientes;
-	await receita.save();
-    res.json({message: "Receita ID " + id + " atualizada.", location: "/receitas/" + id});
-}*/
-
-
-/*
- * Remove uma receita
- */
-/*router.delete('/:id', async function(req, res) {
-    var db = await connect();
-    var receita = await db.Receita.findById(req.params.id);
-    await receita.deleteOne();
-    res.json({message: "Receita ID " + req.params.id + " removida."});
-});*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
+// ENDPOINT: registro de uma nova conta
+//
 router.post('/', async function(req, res){
     console.log("Criando um novo usuário");
 
@@ -201,19 +90,18 @@ router.post('/', async function(req, res){
     });
 
     await usuario.save();
-
-    const token = jwt.sign({ user_id: usuario._id, email }, config.tokenKey, { expiresIn: "2h" });
-    res.json({ message: "O novo usuário foi criado.", token: token });
+    res.json({ message: "O novo usuário foi criado." });
 });
 
 
+//
+// ENDPOINT: Login
+//
 router.post('/login', async function(req, res){
     console.log("Tentativa de login");
 
     var email = req.body.email;
-    console.log(email);
     var senha = req.body.senha;
-    console.log(senha);
 
     var db = await models.connect();
     var usuarioEmail = await db.Usuario.findOne({ email: email }).exec();
@@ -241,7 +129,7 @@ router.post('/login', async function(req, res){
         await usuarioEmail.save();
     }
 
-    const token = jwt.sign({ user_id: usuarioEmail._id, email }, config.tokenKey, { expiresIn: "2h" });
+    const token = jwt.sign({ user_id: usuarioEmail._id, email }, config.auth.tokenKey, { expiresIn: "2h" });
 
     var usuario = {
         nome: usuarioEmail.nome,
@@ -280,15 +168,10 @@ function verificaSenhaValida(senha) {
     return /.*[a-zA-Z].*$/.test(senha) && /.*[0-9].*$/.test(senha);
 }
 
-router.post("/welcome", auth, (req, res) => {
-  res.status(200).json("ok");
-});
 
-
-
-
-
-
+//
+// ENDPOINT: envio de token por esquecimento de senha
+//
 router.post('/esqueci', async function(req, res) {
     console.log("Pedindo a recuperacao de senha do usuário.");
 
@@ -299,6 +182,7 @@ router.post('/esqueci', async function(req, res) {
         return;
     }
 
+    var db = await models.connect();
     var usuario = await db.Usuario.findOne({ email: email }).exec();
 
     if (!usuario) {
@@ -307,25 +191,54 @@ router.post('/esqueci', async function(req, res) {
     }
 
     usuario.dataAtualizacao = new Date();
-    usuario.tokenSenha = CryptoUtils.createToken();
+    usuario.tokenSenha = createRandomToken(32);
     usuario.dataTokenSenha = new Date();
     await usuario.save(usuario);
+
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.sendgrid.net',
+        port: 587,
+        auth: {
+            user: "apikey",
+            pass: config.sendGrid.apiKey
+        }
+    });
+     
+    var url = config.frontend.hostname + "/login/reset?token=" + usuario.tokenSenha + "&email=" + usuario.email;
+    var contents = "Se você solicitou uma recuperação de senha, clique <a href='" + url + "'>aqui</a>.<br>";
+    contents += "Se não tiver pedido a recuperação de senha, relaxa. Só tentaram te dar um golpe!";
+
+    var mailOptions = {
+        from: config.sendGrid.email,
+        to: usuario.email,
+        subject: "Recuperação de senha",
+        text: contents,
+        html: contents
+    };
     
-    /*String url = hostname + "/#/login/reset?token=" + usuario.getTokenSenha() + "&email=" + usuario.getEmail();		
-    String title = "Recuperação de senha";
-    
-    String contents = "Se você solicitou uma recuperação de senha, clique <a href='" + url + "'>aqui</a>.<br>";
-    contents += "Se não tiver pedido a recuperação de senha, relaxa. Só tentaram de dar um golpe!";
-    
-    emailService.sendToUser(usuario.getNome(), usuario.getEmail(), title, contents);*/
-    
-    res.json({message: "O novo usuário foi criado.", id: usuario._id});
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email enviado: ' + info.response);
+        }
+    });
+
+    res.json({ message: "OK" });
 });
 
 
+//
+// Gera um token aleatório para troca de senha
+//
+function createRandomToken(size) {  
+  return crypto.randomBytes(size).toString('base64').slice(0, size);
+}
 
 
-
+//
+// ENDPOINT: Recuperacao de senha do usuario
+//
 router.post('/reset', async function(req, res) {
     console.log("Recuperando a senha do usuário.");
 
@@ -339,11 +252,12 @@ router.post('/reset', async function(req, res) {
         return;
     }
 
-    if (token.length() == 0) {
+    if (token.length == 0) {
         res.status(400).json({message: "O token do usuário não é válido."});
         return;
     }
     
+    var db = await models.connect();
     var usuario = await db.Usuario.findOne({ email: email }).exec();
 
     if (!usuario) {
@@ -351,12 +265,12 @@ router.post('/reset', async function(req, res) {
         return;
     }
 
-    if (!verificaValidadeTokenLogin(usuario, token, 72)) {
+    if (!verificaValidadeTokenLogin(usuario.dataTokenSenha, 72)) {
         res.status(400).json({message: "O token de troca de senha do usuário está vencido."});
         return;
     }
     
-    if (!ValidationUtils.verificaSenhaValida(senha)) {
+    if (!verificaSenhaValida(senha)) {
         res.status(400).json({message: "A senha do usuário não é válida."});
         return;
     }
@@ -366,57 +280,72 @@ router.post('/reset', async function(req, res) {
         return;
     }
     
-//    String encryptedPassword = passwordEncoder.encode(form.getSenha());
-    var encryptedPassword = senha;
-
-    usuario.senha = encryptedPassword;
+    var senhaCriptografada = await bcrypt.hash(senha, 10);
+    usuario.senha = senhaCriptografada;
     await usuario.save();
-    res.json({message: "Nova senha registrada."});
+
+    res.json({ message: "Nova senha registrada." });
 });
 
 
+//
+// Verifica se um token de recuperacao de senha e valido
+//
+function verificaValidadeTokenLogin(dateToken, maximoHoras) {
+    var dateNow = new Date();
+    var hours = Math.abs(dateNow - dateToken) / (60.0 * 60.0 * 1000.0);
+    return hours < maximoHoras;
+}
 
-	
-/*private boolean verificaValidadeTokenLogin(Usuario usuario, String token, int maximoHoras)
-{
-    Date dateToken = usuario.getDataTokenSenha();
-    Date dateNow = new Date();
-    double hours = (dateNow.getTime() - dateToken.getTime()) / (60 * 60 * 1000);
-    return (hours < maximoHoras);
-}*/
 
-/*@PostMapping(value = "/trocaSenha")
-public ResponseEntity<ResponseData> trocaSenha(@RequestBody TrocaSenhaForm form, BindingResult result, Locale locale)
-{
-    log.info("Recuperando a senha do usuário: {}", form.toString());
+//
+// ENDPOINT: troca de senha com usuário logado
+//
+router.post('/trocaSenha', async function(req, res) {
+    console.log("Trocando a senha do usuário.");
 
-    String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    var claims = auth.verifyToken(req, res);
 
-    if (username == null)
-        return ControllerResponse.fail("senhaAntiga", "Não há um usuário logado no sistema.");
+    if (!claims) {
+        return res.status(401).json({ message: 'Acesso não autorizado.' });
+    }
 
-    Usuario usuario = usuarioRepositorio.findByEmail(username);
-
-    if (usuario == null)
-        return ControllerResponse.fail("senhaAntiga", "Não foi possível recuperar os dados do usuário a partir das credenciais.");
+    var userId = claims.user_id;
+    var senhaAntiga = req.body.senhaAntiga;
+    var senhaNova = req.body.senhaNova;
+    var senhaNovaRepetida = req.body.senhaNovaRepetida;
     
-    if (!ValidationUtils.verificaSenhaValida(form.getSenhaAntiga()))
-        return ControllerResponse.fail("senhaAntiga", "A senha atual do usuário não é válida.");
-    
-    if (!passwordEncoder.matches(form.getSenhaAntiga(), usuario.getSenha()))
-        return ControllerResponse.fail("senhaAntiga", "A senha atual não está igual à senha registrada no sistema.");
-    
-    if (!ValidationUtils.verificaSenhaValida(form.getSenhaNova()))
-        return ControllerResponse.fail("senhaNova", "A nova senha do usuário não é válida.");
-    
-    if (!form.getSenhaNova().equals(form.getSenhaNovaRepetida()))
-        return ControllerResponse.fail("senhaNovaRepetida", "A confirmação de senha está diferente da senha.");
+    var db = await models.connect();
+    var usuario = await db.Usuario.findOne({ _id: userId }).exec();
 
-    String encryptedPassword = passwordEncoder.encode(form.getSenhaNova());
-    usuario.setSenha(encryptedPassword);
-    usuarioRepositorio.save(usuario);
-    return ControllerResponse.success();
-}*/
+    if (!usuario) {
+        res.status(400).json({message: "Não foi encontrado um usuário com este e-mail."});
+        return;
+    }
+
+    var senhaCorreta = await bcrypt.compare(senhaAntiga, usuario.senha);
+
+    if (!senhaCorreta) {
+        res.status(400).json({ message: "A senha antiga não confere com as credenciais do usuário." });
+        return;
+    }
+
+    if (!verificaSenhaValida(senhaNova)) {
+        res.status(400).json({message: "A senha do usuário não é válida."});
+        return;
+    }
+
+    if (senhaNova != senhaNovaRepetida) {
+        res.status(400).json({message: "A confirmação de senha está diferente da senha."});
+        return;
+    }
+
+    var senhaCriptografada = await bcrypt.hash(senhaNova, 10);
+    usuario.senha = senhaCriptografada;
+    await usuario.save();
+
+    res.json({ message: "Nova senha registrada." });
+});
 
 
 module.exports = router;

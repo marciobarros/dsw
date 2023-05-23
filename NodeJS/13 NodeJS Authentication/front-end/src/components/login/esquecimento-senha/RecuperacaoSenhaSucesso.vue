@@ -1,28 +1,19 @@
 <template lang="html">
-  <div class="senha-reinicializada row">
-    <div class="col-md-4 col-md-offset-4 text-left">
+  <v-row v-show="!$root.credentials" class="mt-8">
+    <v-col offset-md="4" md="4">
       <h2 class="form-title">Senha trocada!</h2>
-      <h6 class="form-subtitle">A sua senha foi trocada. Você pode utilizar esta nova senha para acessar o sistema.</h6>
+      <h5 class="form-subtitle mb-8">A sua senha foi trocada. Você pode utilizar esta nova senha para acessar o sistema.</h5>
       
-      <div class="link-login">
+      <div class="mt-12">
         <router-link class="link" :to="{ name: 'login' }">
           Ir para a página de login.
         </router-link>
       </div>
-    </div>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
   export default {
   }
 </script>
-
-<style lang="css" scoped>
-div.senha-reinicializada {
-  margin-top: 32px;
-}
-div.link-login {
-  margin-top: 32px;
-}
-</style>

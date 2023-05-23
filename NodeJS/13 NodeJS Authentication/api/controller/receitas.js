@@ -2,14 +2,22 @@ var express = require('express');
 var router = express.Router();
 
 const mongoose = require('mongoose');
-const config = require('../config/database.js');
+
+const config = require('../config/config.js');
 const models = require('../model/models.js');
+const auth = require('../auth/auth.js');
 
 
-/*
- * Retorna a lista paginada de receitas
- */
+//
+// Retorna a lista paginada de receitas
+//
 router.get('/', async function(req, res){
+    var claims = auth.verifyToken(req, res);
+
+    if (!claims) {
+        return res.status(401).json({ message: 'Acesso não autorizado.' });
+    }
+
     var page = req.query.page || 1;
     var itemsPerPage = req.query.itemsPage || 5;
     var filter = req.query.filter || '';
@@ -38,20 +46,32 @@ router.get('/', async function(req, res){
 });
 
 
-/*
- * Retorna uma receita, dado o seu ID
- */
+//
+// Retorna uma receita, dado o seu ID
+//
 router.get('/:id', async function(req, res){
+    var claims = auth.verifyToken(req, res);
+
+    if (!claims) {
+        return res.status(401).json({ message: 'Acesso não autorizado.' });
+    }
+
     var db = await models.connect();
     var receita = await db.Receita.findById(req.params.id);
     res.json(receita);
 });
 
 
-/*
- * Insere ou atualiza uma receita
- */
+//
+// Insere ou atualiza uma receita
+//
 router.post('/', async function(req, res){
+    var claims = auth.verifyToken(req, res);
+
+    if (!claims) {
+        return res.status(401).json({ message: 'Acesso não autorizado.' });
+    }
+
     var id = req.body._id;
     var nome = req.body.nome;
     var preparo = req.body.preparo;
@@ -68,11 +88,10 @@ router.post('/', async function(req, res){
 });
 
 
-/*
- * Verifica as regras de negócio em uma nova receita
- */
+//
+// Verifica as regras de negócio em uma nova receita
+//
 function verificaRegrasNegocio(nome, preparo, ingredientes, res) {
-
     if (!nome || nome.length == 0) {
         res.status(400).json({message: "O nome da receita não pode ser vazio."});
         return false;
@@ -108,9 +127,9 @@ function verificaRegrasNegocio(nome, preparo, ingredientes, res) {
 }
 
 
-/*
- * Insere uma receita no conjunto conhecido
- */
+//
+// Insere uma receita no conjunto conhecido
+//
 async function insereReceita(nome, preparo, ingredientes, res) {
     var db = await models.connect();
     var receita = await db.Receita.create(receita);
@@ -122,9 +141,9 @@ async function insereReceita(nome, preparo, ingredientes, res) {
 }
 
 
-/*
- * Atualiza os dados de uma receita
- */
+//
+// Atualiza os dados de uma receita
+//
 async function atualizaReceita(id, nome, preparo, ingredientes, res) {
     var db = await models.connect();
     var receita = await db.Receita.findById(id);
@@ -136,10 +155,16 @@ async function atualizaReceita(id, nome, preparo, ingredientes, res) {
 }
 
 
-/*
- * Remove uma receita
- */
+//
+// Remove uma receita
+//
 router.delete('/:id', async function(req, res) {
+    var claims = auth.verifyToken(req, res);
+
+    if (!claims) {
+        return res.status(401).json({ message: 'Acesso não autorizado.' });
+    }
+
     var db = await models.connect();
     var receita = await db.Receita.findById(req.params.id);
     await receita.deleteOne();

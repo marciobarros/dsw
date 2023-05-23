@@ -1,22 +1,31 @@
 const jwt = require("jsonwebtoken");
 
-const config = require('../config/database.js');
+const config = require('../config/config.js');
 
-const verifyToken = function (req, res, next) {
-  const token = req.headers["x-access-token"];
+//
+// Recupera as "claims" de um token JWT
+//
+const verifyToken = function(req, res) {
+  if (!req.headers) {
+    return null;
+  }
 
-  if (!token) {
-    return res.status(403).send("O token de autenticação não foi encontraodo.");
+  if (!req.headers.authorization) {
+    return null;
+  }
+
+  var authorization = req.headers.authorization.split(' ');
+
+  if (authorization.length != 2) {
+    return null;
   }
 
   try {
-    const decoded = jwt.verify(token, config.tokenKey);
-    req.user = decoded;
-    console.log(decoded);
-  } catch (err) {
-    return res.status(401).send("Token inválido.");
+      return jwt.verify(authorization[1], config.auth.tokenKey);
+    } 
+  catch (e) {
+    return null;
   }
-  return next();
 }
 
-module.exports = verifyToken;
+module.exports = { verifyToken }

@@ -4,15 +4,15 @@
         <v-list nav dense>
             <v-list-item-group active-class="deep-purple--text text--accent-4">
                 <v-list-item>
-                    <v-list-item-title @click="controladorCadastroReceitas.lista()">Receitas</v-list-item-title>
+                    <v-list-item-title @click="listaReceitas">Receitas</v-list-item-title>
                 </v-list-item>
             </v-list-item-group>
         </v-list>
     </v-navigation-drawer>
     
     <v-app-bar app color="deep-purple accent-4" dark>
-        <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>Minha primeira aplicação</v-toolbar-title>
+        <v-app-bar-nav-icon @click.stop="toggleDrawer" v-if="$root.credentials"></v-app-bar-nav-icon>
+        <v-toolbar-title>Receituário VueJS</v-toolbar-title>
         <v-spacer></v-spacer>
         <span v-if="$root.credentials">
           Olá, {{$root.credentials.nome}}.
@@ -49,7 +49,20 @@ export default {
     logout: function() {
       this.$root.credentials = null;
       this.$router.replace('/');
+    },
+
+    listaReceitas: function() {
+      this.$router.replace('/receitas');      
     }
   },
 };
 </script>
+
+<style>
+p.error {
+    color: white !important;
+}
+.v-data-table__wrapper {
+    border-top: 1px solid #ccc;
+}
+</style>
