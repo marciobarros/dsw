@@ -1,0 +1,4 @@
+[Regiao]->*[Pais]->*[Cidade]
+[Regiao|id;nome]
+[Pais|id;nome;iso2;iso3;codigo_numerico;codigo_telefone;capital;id_regiao;latitude;longitude]
+[Cidade|id;nome;id_pais;latitude;longitude;codigo_wikidata]
