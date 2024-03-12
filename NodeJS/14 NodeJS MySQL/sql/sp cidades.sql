@@ -1,0 +1,20 @@
+DROP PROCEDURE IF EXISTS RegistraRegiaoBasico;
+DELIMITER //
+CREATE PROCEDURE RegistraRegiaoBasico(vNome VARCHAR(20))
+BEGIN
+	INSERT INTO Regioes (nome)
+	VALUES (vNome);
+END //
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS RegistraRegiao;
+DELIMITER //
+CREATE PROCEDURE RegistraRegiao(vNome VARCHAR(20), OUT id INT)
+BEGIN
+	INSERT INTO Regioes (nome)
+	VALUES (vNome);
+
+	SET id = LAST_INSERT_ID();
+END //
+DELIMITER ;
