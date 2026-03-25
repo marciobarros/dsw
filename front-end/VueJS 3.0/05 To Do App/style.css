@@ -1,0 +1,16 @@
+body {
+  color: black;
+  padding: 0 24px;
+  margin: 0;
+}
+h2.lista {
+  margin-bottom: 16px;
+}
+h2.form {
+  margin-top: 48px;
+  margin-bottom: 8px;
+}
+li {
+  margin: 8px -40px;
+  list-style: none;
+}
